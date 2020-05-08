@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+
+  app:
+    build: docker
+    ports:
+      - ${HTTP_PORT}:80
+    restart: always
+    volumes:
+      - ${SYMFONY_PATH}:/var/www/app
+    tty: true
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_DATABASE: ${SYMFONY_DB_NAME}
+      MYSQL_USER: ${SYMFONY_DB_USER}
+      MYSQL_PASSWORD: ${SYMFONY_DB_PASS}
+    ports:
+      - ${DB_PORT}:3306
+
+  node:
+    image: node
+    volumes_from:
+      - app
+
+  mail:
+    image: schickling/mailcatcher
+    ports:
+      - ${MAILCATCHER_PORT}:1080
+      - ${MAIL_PORT}:1025
+volumes:
+  db_data:

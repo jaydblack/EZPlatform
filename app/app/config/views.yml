@@ -1,0 +1,27 @@
+ezpublish:
+  system:
+    site_group:
+      content_view:
+        full:
+          home_page:
+            template: full\home_page.html.twig
+            match:
+              Id\Location: 2
+          blog_post:
+            template: '@ezdesign\full\blog_post.html.twig'
+            match:
+              Identifier\ContentType: [blog_post]
+          ride:
+            template: full\ride.html.twig
+            controller: AppBundle:Ride:viewRideWithLandmarks
+            match:
+              Identifier\ContentType: ride
+        line:
+          ride:
+            template: line/ride.html.twig
+            match:
+              Identifier\ContentType: ride
+          landmark:
+            template: line/landmark.html.twig
+            match:
+              Identifier\ContentType: landmark

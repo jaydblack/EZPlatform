@@ -1,0 +1,11 @@
+{% extends "main_layout.html.twig" %}
+{% block content %}
+    <h2>Startseite</h2>
+    <hr/>
+    <hr color="red"/>
+    <hr color="yellow"/>
+
+    <div class="col-xs-10 col-xs-offset-1 text-justified">
+        {{ render( controller( "AppBundle:HomePage:getAllRides", {'location': location, 'request': app.request} ) ) }}
+    </div>
+{% endblock %}

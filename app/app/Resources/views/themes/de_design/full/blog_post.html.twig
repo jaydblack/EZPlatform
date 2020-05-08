@@ -1,0 +1,10 @@
+{% extends "main_layout.html.twig" %}
+
+{% block content %}
+    <h3>{{ ez_render_field(content, 'title') }}</h3>
+    Achtung Anschluss!
+    <hr/>
+    <hr color="red"/>
+    <hr color="yellow"/>
+    <div>{{ ez_render_field(content, 'content') }}</div>
+{% endblock %}
