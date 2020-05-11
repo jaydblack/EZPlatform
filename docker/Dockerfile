@@ -72,3 +72,9 @@ ENV DEBIAN_FRONTEND teletype
 CMD apachectl -D FOREGROUND
 
 ADD import-cron /etc/cron.d/
+
+### Installl Node
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+
+RUN npm install yarn -g
