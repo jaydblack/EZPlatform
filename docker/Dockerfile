@@ -1,4 +1,6 @@
-FROM php:7.1-apache
+ARG PHP_VERSION=7.1
+
+FROM php:${PHP_VERSION}-apache
 
 RUN apt-get update && \
         apt-get install -y \
@@ -54,14 +56,14 @@ ADD app.conf /etc/apache2/sites-available/app.conf
 RUN pecl install xdebug-2.5.5 && docker-php-ext-enable xdebug
 COPY php/php.ini /usr/local/etc/php/php.ini
 
+RUN usermod -u 1000 www-data
+
 RUN a2ensite app
 RUN a2enmod headers
 RUN a2enmod rewrite
 RUN service apache2 restart
 
 WORKDIR /var/www/app
-
-RUN usermod -u 1000 www-data
 
 EXPOSE 80
 

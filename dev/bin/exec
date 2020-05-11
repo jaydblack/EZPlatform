@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+
+if [ $# -lt 2 ]; then
+  echo "usage: $0 <docker service> <args>"
+  exit 2
+fi
+
+PROJECT_DIR="$(readlink -m "$(dirname "$0")/../../app")"
+SERVICE="$1"
+shift 1
+
+DOCKER_DIR="$PROJECT_DIR/.."
+
+cd "$DOCKER_DIR"
+
+docker-compose --log-level ERROR up -d
+
+docker-compose exec \
+  -u $(id -u):$(id -g) \
+  $([ ! -t 1 ] || echo "-T") \
+  "$SERVICE" "$@"
