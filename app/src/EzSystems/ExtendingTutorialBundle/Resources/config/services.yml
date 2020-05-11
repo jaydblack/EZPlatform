@@ -1,0 +1,36 @@
+services:
+  EzSystems\ExtendingTutorialBundle\Tab\Dashboard\Everyone\EveryoneArticleTab:
+    autowire: true
+    autoconfigure: true
+    public: false
+    tags:
+      - { name: ezplatform.tab, group: dashboard-everyone }
+
+  EzSystems\ExtendingTutorialBundle\EventListener\:
+    resource: '../../EventListener/*'
+    autowire: true
+    autoconfigure: true
+    public: true
+    tags:
+      - { name: kernel.event_subscriber }
+
+  EzSystems\ExtendingTutorialBundle\Controller\:
+    resource: '../../Controller/*'
+    autowire: true
+    autoconfigure: true
+    public: false
+    exclude: '../../Controller/{Controller}'
+
+  ezplatform.udw.image.panel.module.js:
+    parent: EzSystems\EzPlatformAdminUi\Component\ScriptComponent
+    arguments:
+      $src: /bundles/ezsystemsextendingtutorial/js/modules/ImagesPanel.module.js
+    tags:
+      - { name: ezplatform.admin_ui.component, group: custom-admin-ui-modules }
+
+  ezplatform.udw.add.tab.js:
+    parent: EzSystems\EzPlatformAdminUi\Component\ScriptComponent
+    arguments:
+      $src: /bundles/ezsystemsextendingtutorial/js/add.tab.js
+    tags:
+      - { name: ezplatform.admin_ui.component, group: custom-admin-ui-config }
