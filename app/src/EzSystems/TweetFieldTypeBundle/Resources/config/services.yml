@@ -1,0 +1,3 @@
+services:
+  ezsystems.tweetbundle.twitter.client:
+    class: EzSystems\TweetFieldTypeBundle\Twitter\TwitterClient
